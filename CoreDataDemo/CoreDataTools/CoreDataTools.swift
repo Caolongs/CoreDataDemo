@@ -135,7 +135,11 @@ extension CoreDataTools {
                 let newObj = NSManagedObject(entity: entity!, insertInto: context)
 
                 for (key, value) in dict {
-                    newObj.setValue(value, forKey: key);
+                    if ((value as? NSNull) != nil) {
+                        newObj.setValue(nil, forKey: key)
+                    } else {
+                        newObj.setValue(value, forKey: key)
+                    }
                 }
                 //context.performAndWait({
                     do {
@@ -151,7 +155,11 @@ extension CoreDataTools {
             let newObj = NSManagedObject(entity: entity!, insertInto: context)
             
             for (key, value) in dict {
-                newObj.setValue(value, forKey: key);
+                if ((value as? NSNull) != nil) {
+                    newObj.setValue(nil, forKey: key)
+                } else {
+                    newObj.setValue(value, forKey: key)
+                }
             }
             context.performAndWait({
                 //context.insert(newObj)
